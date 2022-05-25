@@ -67,10 +67,6 @@ public class ChonNhacActivity extends AppCompatActivity {
 	  }
   }
 
-
-
-
-
   void ListNhac_Baby(){
 	FirebaseDatabase database = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app/");
 	DatabaseReference myRef = database.getReference("Music");
