@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Pregbe/app/src/main/res/layout/custom_dialog.xml" value="0.16944444444444445" />
+        <entry key="..\:/Users/min/AndroidStudioProjects/Pregbe/app/src/main/res/layout/activity_bai_viet2.xml" value="0.16944444444444445" />
+        <entry key="..\:/Users/min/AndroidStudioProjects/Pregbe/app/src/main/res/layout/activity_tuan_thai.xml" value="0.16944444444444445" />
+        <entry key="..\:/Users/min/AndroidStudioProjects/Pregbe/app/src/main/res/layout/danhsach_item.xml" value="0.16944444444444445" />
+        <entry key="..\:/Users/min/AndroidStudioProjects/Pregbe/app/src/main/res/layout/fragment_canhan.xml" value="0.16944444444444445" />
+        <entry key="..\:/Users/min/AndroidStudioProjects/Pregbe/app/src/main/res/layout/fragment_home.xml" value="0.16944444444444445" />
+        <entry key="..\:/Users/min/AndroidStudioProjects/Pregbe/app/src/main/res/layout/fragment_lich.xml" value="0.16944444444444445" />
+        <entry key="..\:/Users/min/AndroidStudioProjects/Pregbe/app/src/main/res/layout/fragment_thongtin.xml" value="0.16944444444444445" />
+        <entry key="..\:/Users/min/AndroidStudioProjects/Pregbe/app/src/main/res/layout/item_recyclerview.xml" value="0.16944444444444445" />
+        <entry key="..\:/Users/min/AndroidStudioProjects/Pregbe/app/src/main/res/layout/item_thongtin.xml" value="0.16944444444444445" />
+        <entry key="..\:/Users/min/AndroidStudioProjects/Pregbe/app/src/main/res/layout/item_tuan_thai.xml" value="0.16944444444444445" />
+        <entry key="..\:/Users/min/AndroidStudioProjects/Pregbe/app/src/main/res/layout/layout_custom_dialog.xml" value="0.16944444444444445" />
+        <entry key="..\:/Users/min/AndroidStudioProjects/Pregbe/app/src/main/res/layout/list_item_tuan_thai.xml" value="0.16944444444444445" />
+        <entry key="..\:/Users/min/AndroidStudioProjects/Pregbe/app/src/main/res/menu/menu2.xml" value="0.16944444444444445" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

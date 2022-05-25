@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="orange_500">#EA5C2B</color>
+    <color name="orange_300">#FF7F5C</color>
+    <color name="pink_200">#FFDCC4</color>
+    <color name="pink_100">#FFE5E0</color>
+    <color name="pink_50">#FFF6F4</color>
+    <color name="blue_400">#454D81</color>
+    <color name="grey_500">#2D302F</color>
+    <color name="grey_400">#575757</color>
+    <color name="grey_300">#848484</color>
+    <color name="grey_200">#B0B0B0</color>
+    <color name="grey_100">#C4C4C4</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+</resources>

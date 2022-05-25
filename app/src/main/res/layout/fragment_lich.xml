@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.LichFragment"
+    android:background="@color/pink_50">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="95dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="100dp"
+            android:gravity="center"
+            android:text="Ghi chú lịch khám"
+            android:textColor="@color/blue_400"
+            android:textSize="@dimen/lable_4"
+            android:textStyle="bold" />
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            style="@style/roundImageView"
+            android:layout_width="374dp"
+            android:layout_height="328dp"
+            android:layout_below="@+id/textView14"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="17dp"
+            android:maxDate="07/01/2022"
+
+            android:background="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/themLichKham"
+            android:layout_width="354dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/calendarView"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="112dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="123dp"
+            android:background="@drawable/button_orange300"
+            android:text="Thêm lịch khám"
+            android:textColor="@color/white"
+            android:textSize="@dimen/lable_6"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/themLichKham"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="192dp"
+            android:gravity="center"
+            android:text="Lịch khám trong tuần"
+            android:textColor="@color/blue_400"
+            android:textSize="@dimen/lable_4"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="326dp"
+            android:layout_below="@+id/textView15"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="-10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="-28dp"
+            android:src="@drawable/lich" />
+
+        <TextView
+            android:id="@+id/txtTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="55dp"
+            android:layout_marginBottom="314dp"
+            android:text="TextView" />
+    </RelativeLayout>
+</FrameLayout>

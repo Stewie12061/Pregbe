@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DangKyThanhCongActivity2"
+    android:background="@color/pink_50">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dangkythanhcong" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/xacnhan"
+        android:layout_width="251dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="52dp"
+        android:background="@drawable/button_pink200"
+        android:gravity="center"
+        android:text="Xác nhận"
+        android:textAllCaps="false"
+        android:textColor="@color/orange_300"
+        android:textSize="@dimen/lable_4"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

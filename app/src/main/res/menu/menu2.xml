@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item1"
+        android:icon="@drawable/ic_note"
+        android:title="@string/title_lich" />
+    <item
+        android:id="@+id/item2"
+        android:title="@string/title_congcu"
+        android:icon="@drawable/ic_dashboard"/>
+    <item
+        android:id="@+id/item3"
+        android:title="@string/title_trangchu"
+        android:icon="@drawable/ic_home"/>
+    <item
+        android:id="@+id/item4"
+        android:title="@string/title_thongtin"
+        android:icon="@drawable/ic_news"/>
+    <item
+        android:id="@+id/item5"
+        android:title="@string/title_canhan"
+        android:icon="@drawable/ic_user"/>
+
+</menu>

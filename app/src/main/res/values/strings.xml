@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Pregbe</string>
+    <dimen name="label_1">35sp</dimen>
+    <dimen name="label_2">32sp</dimen>
+    <dimen name="lable_3">25sp</dimen>
+    <dimen name="lable_4">20sp</dimen>
+    <dimen name="lable_5">17sp</dimen>
+    <dimen name="lable_6">15sp</dimen>
+    <dimen name="label_7">10sp</dimen>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title_trangchu">Trang chủ</string>
+    <string name="title_lich">Lịch khám</string>
+    <string name="title_congcu">Công cụ</string>
+    <string name="title_thongtin">Thông tin</string>
+    <string name="title_canhan">Cá nhân</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

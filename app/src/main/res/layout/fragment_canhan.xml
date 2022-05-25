@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.CanhanFragment"
+    android:background="@color/pink_50">
+
+
+   <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_playing"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="23dp"
+                    android:src="@drawable/female"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/image_playing"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="211dp"
+                    android:layout_toEndOf="@+id/image_playing"
+                    android:text="Xin chào"
+                    android:textColor="@color/blue_400"
+                    android:textSize="@dimen/lable_4"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="71dp"
+                    android:layout_toEndOf="@+id/image_playing"
+                    android:text="Phương"
+                    android:textColor="@color/blue_400"
+                    android:textSize="@dimen/lable_3"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_below="@+id/image_playing"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="23dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="239dp"
+                    android:layout_marginBottom="21dp"
+                    android:text="Thông tin chi tiết"
+                    android:textColor="@color/blue_400"
+                    android:textSize="@dimen/lable_5"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="167dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/lnln"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:dividerPadding="20dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/card_relax"
+                            android:layout_width="181dp"
+                            android:layout_height="195dp"
+                            android:layout_margin="10dp"
+                            android:layout_marginTop="5dp"
+                            app:cardBackgroundColor="@color/pink_200"
+                            app:cardCornerRadius="40dp"
+                            app:cardElevation="3dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.304"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/relax"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="40dp"
+                                    android:background="@drawable/ic_news" />
+
+                                <TextView
+                                    android:id="@+id/tv_relax"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Thông tin của mẹ"
+                                    android:textColor="@color/blue_400"
+                                    android:textSize="@dimen/lable_3"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/card_be"
+                            android:layout_width="181dp"
+                            android:layout_height="195dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            app:cardBackgroundColor="@color/pink_200"
+                            app:cardCornerRadius="40dp"
+                            app:cardElevation="3dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.304"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/be"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="40dp"
+                                    android:background="@drawable/ic_news" />
+
+                                <TextView
+                                    android:id="@+id/tv_be"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Thông tin của mẹ"
+                                    android:textColor="@color/blue_400"
+                                    android:textSize="@dimen/lable_3"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ln"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:dividerPadding="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/card_lichkham"
+                            android:layout_width="181dp"
+                            android:layout_height="195dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:layout_marginTop="5dp"
+                            app:cardBackgroundColor="@color/pink_200"
+                            app:cardCornerRadius="40dp"
+                            app:cardElevation="3dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.304"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/lichkham"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="40dp"
+                                    android:background="@drawable/ic_news" />
+
+                                <TextView
+                                    android:id="@+id/tv_lichkham"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Lịch khám"
+                                    android:textColor="@color/blue_400"
+                                    android:textSize="@dimen/lable_3"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/card_caidat"
+                            android:layout_width="181dp"
+                            android:layout_height="195dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            app:cardBackgroundColor="@color/pink_200"
+                            app:cardCornerRadius="40dp"
+                            app:cardElevation="3dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.304"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/caidat"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="40dp"
+                                    android:background="@drawable/ic_news" />
+
+                                <TextView
+                                    android:id="@+id/tv_caidat"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Cài đặt và điều khoản"
+                                    android:textColor="@color/blue_400"
+                                    android:textSize="@dimen/lable_3"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+                    <Button
+                        android:id="@+id/signOut"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:text="SIGN OUT"
+                        android:textStyle="bold"
+                        android:textSize="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
