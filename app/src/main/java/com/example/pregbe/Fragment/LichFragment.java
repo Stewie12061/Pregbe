@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -28,21 +29,14 @@ public class LichFragment extends Fragment {
     private int mHour, mMinute;
 
     Button themLichKham;
-    TextView txtTime;
-
+    TextView txtTime, txtLich, txtTieuDe, txtNoiDung;
 
     public LichFragment() {
-
     }
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,13 +45,15 @@ public class LichFragment extends Fragment {
 
         CalendarView simpleCalendarView = (CalendarView) view.findViewById(R.id.calendarView); // get the reference of CalendarView
 
+        txtLich = view.findViewById(R.id.txtLich);
+
         simpleCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 mDay = String.valueOf(dayOfMonth);
                 mMonth = String.valueOf(month+1);
                 mYear = String.valueOf(year);
-
+                txtLich.setText(mDay + "-" + mMonth + "-" + mYear);
             }
         });
 
@@ -84,33 +80,34 @@ public class LichFragment extends Fragment {
         View dialogView = inflater.inflate(R.layout.layout_custom_dialog, null);
         builder.setView(dialogView);
         AlertDialog alertDialog = builder.create();
-        Button settime = dialogView.findViewById(R.id.button2);
+
+        TextView settime = dialogView.findViewById(R.id.addTime);
+        EditText edtTime = dialogView.findViewById(R.id.edtTime);
         settime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buttonSelectTime();
+
+                final Calendar c = Calendar.getInstance();
+                mHour = c.get(Calendar.HOUR_OF_DAY);
+                mMinute = c.get(Calendar.MINUTE);
+
+                // Launch Time Picker Dialog
+                TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
+                        new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay,
+                                                  int minute) {
+
+                                txtTime.setText(hourOfDay + ":" + minute);
+                                edtTime.setText(hourOfDay + ":" + minute);
+                            }
+                        }, mHour, mMinute, false);
+                timePickerDialog.show();
             }
         });
 
         alertDialog.show();
     }
 
-    private void buttonSelectTime() {
-        final Calendar c = Calendar.getInstance();
-        mHour = c.get(Calendar.HOUR_OF_DAY);
-        mMinute = c.get(Calendar.MINUTE);
-
-        // Launch Time Picker Dialog
-        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
-                new TimePickerDialog.OnTimeSetListener() {
-
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay,
-                                          int minute) {
-
-                        txtTime.setText(hourOfDay + ":" + minute);
-                    }
-                }, mHour, mMinute, false);
-        timePickerDialog.show();
-    }
 }

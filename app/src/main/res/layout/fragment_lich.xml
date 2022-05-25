@@ -45,13 +45,13 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/themLichKham"
             android:layout_width="354dp"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:layout_below="@+id/calendarView"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="112dp"
+            android:layout_marginStart="120dp"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="123dp"
+            android:layout_marginEnd="120dp"
             android:background="@drawable/button_orange300"
             android:text="Thêm lịch khám"
             android:textColor="@color/white"
@@ -65,37 +65,80 @@
             android:layout_below="@+id/themLichKham"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="22dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="192dp"
+            android:layout_marginStart="108dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="108dp"
             android:gravity="center"
             android:text="Lịch khám trong tuần"
             android:textColor="@color/blue_400"
             android:textSize="@dimen/lable_4"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="match_parent"
-            android:layout_height="326dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
             android:layout_below="@+id/textView15"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="-10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="-28dp"
-            android:src="@drawable/lich" />
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="20dp" >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/txtTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="55dp"
-            android:layout_marginBottom="314dp"
-            android:text="TextView" />
+                <TextView
+                    android:id="@+id/txtTieuDe"
+                    android:layout_width="57dp"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Thêm tiêu đề"
+                    app:layout_constraintStart_toEndOf="@+id/imageView5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtDes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Thêm nội dung"
+                    app:layout_constraintStart_toStartOf="@+id/txtTieuDe"
+                    app:layout_constraintTop_toBottomOf="@+id/txtTieuDe" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cuate"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtLich"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Thêm ngày khám"
+                    app:layout_constraintStart_toStartOf="@+id/txtDes"
+                    app:layout_constraintTop_toBottomOf="@+id/txtDes" />
+
+                <TextView
+                    android:id="@+id/txtTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Thêm giờ khám"
+                    app:layout_constraintStart_toStartOf="@+id/txtLich"
+                    app:layout_constraintTop_toBottomOf="@+id/txtLich" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
 </FrameLayout>
