@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.pregbe.ForgetPasswordActivity;
+//import com.example.pregbe.ForgetPasswordActivity;
 import com.example.pregbe.MainActivity;
 import com.example.pregbe.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -103,12 +103,12 @@ public class DangNhap extends AppCompatActivity {
             }
         });
 
-        forgetPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(DangNhap.this, ForgetPasswordActivity.class));
-            }
-        });
+//        forgetPass.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(DangNhap.this, ForgetPasswordActivity.class));
+//            }
+//        });
 
         FBLoginbtn.setOnClickListener(new View.OnClickListener() {
             @Override

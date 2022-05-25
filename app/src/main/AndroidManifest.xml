@@ -7,7 +7,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pregbe">
-        <activity android:name=".ForgetPasswordActivity">
+        <activity android:name=".ForgetPasswordActivity"
+            android:exported="true" >
         </activity>
         <activity
             android:name=".TuanThai"
@@ -44,6 +45,12 @@
         </activity>
         <activity
             android:name=".GioiThieu.ChaoMung2"
+            android:exported="true" />
+        <activity
+            android:name=".Music.ChonNhacActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Music.TestActivity"
             android:exported="true" />
     </application>
 

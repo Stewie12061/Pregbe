@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".Music.MusicActivity"
+	android:background="@color/pink_50">
+
+	<ViewFlipper
+		android:id="@+id/view_flipper"
+		android:layout_width="410dp"
+		android:layout_height="497dp"
+		android:inAnimation="@android:anim/slide_in_left"
+		android:outAnimation="@android:anim/slide_out_right"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintVertical_bias="0.462">
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:orientation="vertical">
+
+			<com.airbnb.lottie.LottieAnimationView
+				android:id="@+id/lottie_meditation"
+				android:layout_width="300dp"
+				android:layout_height="300dp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0.493"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintVertical_bias="0.255"
+				app:lottie_autoPlay="true"
+				app:lottie_loop="true"
+				app:lottie_rawRes="@raw/mom" />
+			<TextView
+				android:id="@+id/meditationTv"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="Cho mẹ"
+				android:textColor="@color/orange_300"
+				android:textSize="@dimen/label_2"
+				android:textStyle="bold" />
+
+			<TextView
+				android:id="@+id/tv_soluong"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="3 bài"
+				android:textColor="@color/blue_400"
+				android:textSize="@dimen/lable_5" />
+
+			<Button
+				android:id="@+id/btn_mom"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:text="Nghe"
+				android:layout_gravity="center"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:orientation="vertical">
+
+			<com.airbnb.lottie.LottieAnimationView
+				android:id="@+id/lottie_relax"
+				android:layout_width="300dp"
+				android:layout_height="300dp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0.493"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintVertical_bias="0.255"
+				app:lottie_autoPlay="true"
+				app:lottie_loop="true"
+				app:lottie_rawRes="@raw/baby" />
+			<TextView
+				android:id="@+id/relaxTv"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="Cho bé"
+				android:textColor="@color/orange_300"
+				android:textSize="@dimen/label_2"
+				android:textStyle="bold" />
+
+			<TextView
+				android:id="@+id/tv_soluong2"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="4 songs"
+				android:textColor="@color/blue_400"
+				android:textSize="@dimen/lable_5" />
+
+			<Button
+				android:id="@+id/btn_baby"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:text="Nghe"
+				android:layout_gravity="center"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:orientation="vertical">
+
+			<com.airbnb.lottie.LottieAnimationView
+				android:id="@+id/lottie_focus"
+				android:layout_width="300dp"
+				android:layout_height="300dp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0.493"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintVertical_bias="0.255"
+				app:lottie_autoPlay="true"
+				app:lottie_loop="true"
+				app:lottie_rawRes="@raw/radio" />
+			<TextView
+				android:id="@+id/focusTv"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="Radio cho mẹ"
+				android:textColor="@color/orange_300"
+				android:textSize="@dimen/label_2"
+				android:textStyle="bold"/>
+
+			<TextView
+				android:id="@+id/tv_soluong3"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="4 bài"
+				android:textColor="@color/blue_400"
+				android:textSize="@dimen/lable_5"/>
+
+			<Button
+				android:id="@+id/btn_radio"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:text="Nghe"
+				android:layout_gravity="center"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:orientation="vertical">
+
+			<com.airbnb.lottie.LottieAnimationView
+				android:id="@+id/lottie_sleep"
+				android:layout_width="300dp"
+				android:layout_height="300dp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0.493"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintVertical_bias="0.255"
+				app:lottie_autoPlay="true"
+				app:lottie_loop="true"
+				app:lottie_rawRes="@raw/relax"/>
+			<TextView
+				android:id="@+id/sleepTv"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="Nhạc thư giãn"
+				android:textColor="@color/orange_300"
+				android:textSize="@dimen/label_2"
+				android:textStyle="bold"/>
+
+			<TextView
+				android:id="@+id/tv_soluong4"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="6 bài"
+				android:textColor="@color/blue_400"
+				android:textSize="@dimen/lable_5" />
+
+			<Button
+				android:id="@+id/btn_relax"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:text="Nghe"
+				android:layout_gravity="center"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:orientation="vertical">
+
+			<com.airbnb.lottie.LottieAnimationView
+				android:id="@+id/lottie_truyen"
+				android:layout_width="300dp"
+				android:layout_height="300dp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0.493"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintVertical_bias="0.255"
+				app:lottie_autoPlay="true"
+				app:lottie_loop="true"
+				app:lottie_rawRes="@raw/reading"/>
+			<TextView
+				android:id="@+id/truyenTv"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="Đọc truyện"
+				android:textColor="@color/orange_300"
+				android:textSize="@dimen/label_2"
+				android:textStyle="bold"/>
+
+			<TextView
+				android:id="@+id/tv_soluong5"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="6 truyện"
+				android:textColor="@color/blue_400"
+				android:textSize="@dimen/lable_5" />
+
+			<Button
+				android:id="@+id/btn_truyen"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:text="Nghe"
+				android:layout_gravity="center"/>
+		</LinearLayout>
+	</ViewFlipper>
+
+	<androidx.appcompat.widget.AppCompatButton
+		android:id="@+id/previous"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="104dp"
+		android:layout_marginBottom="36dp"
+		android:background="@drawable/ic_previous"
+		android:onClick="previousView"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/view_flipper"
+		app:layout_constraintVertical_bias="0.656" />
+
+	<androidx.appcompat.widget.AppCompatButton
+		android:id="@+id/next"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="80dp"
+		android:layout_marginBottom="44dp"
+		android:background="@drawable/ic_next"
+		android:onClick="nextView"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.69"
+		app:layout_constraintStart_toEndOf="@+id/previous"
+		app:layout_constraintTop_toBottomOf="@+id/view_flipper"
+		app:layout_constraintVertical_bias="0.745" />
+
+	<TextView
+		android:id="@+id/textView4"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="64dp"
+		android:text="Âm nhạc cho mẹ và bé"
+		android:textColor="@color/orange_300"
+		android:textStyle="bold"
+		android:textSize="30dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
