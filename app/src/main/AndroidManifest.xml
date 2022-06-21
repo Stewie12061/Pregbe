@@ -7,14 +7,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pregbe">
-        <activity android:name=".ForgetPasswordActivity"
-            android:exported="true" >
-        </activity>
+        <activity
+            android:name=".BaiVietDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ForgetPasswordActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".TuanThai"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".GioiThieu.DangNhap"
             android:exported="false" />
@@ -26,14 +27,10 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".DangKyThanhCongActivity2"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".GioiThieu.ChaoMung1"
             android:exported="true">

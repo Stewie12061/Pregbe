@@ -33,7 +33,7 @@ public class BaiViet2 extends AppCompatActivity {
     RecyclerView RVtuan, RVdanhsach;
     FirebaseDatabase firebaseDatabase;
 
-    DatabaseReference baiVietDetailRef;
+    DatabaseReference baiVietDetailRef,thongTinRef;
     FirebaseRecyclerAdapter<Tuan, SoTuanViewHolder> adapterTuan;
     FirebaseRecyclerAdapter<Danhsach, DanhSachViewHolder> adapterDanhSach;
     String id;
@@ -52,8 +52,9 @@ public class BaiViet2 extends AppCompatActivity {
         RVtuan = findViewById(R.id.RVTuan);
         RVdanhsach = findViewById(R.id.rvDanhSach);
 
-        firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app");
         baiVietDetailRef = firebaseDatabase.getReference("BaiVietDetail");
+        thongTinRef = firebaseDatabase.getReference("ThongTin");
 
         RVtuan.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.HORIZONTAL, false));
@@ -61,7 +62,7 @@ public class BaiViet2 extends AppCompatActivity {
         RVdanhsach.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false));
 
-        id = getIntent().getStringExtra("id");
+        id = getIntent().getStringExtra("idCate");
 
         getTuan();
 
@@ -74,23 +75,23 @@ public class BaiViet2 extends AppCompatActivity {
     }
 
     private void getTuan() {
-        Query query = baiVietDetailRef;
+        Query query = thongTinRef;
         FirebaseRecyclerOptions<Tuan> options = new FirebaseRecyclerOptions.Builder<Tuan>().setQuery(query,Tuan.class).build();
 
         adapterTuan = new FirebaseRecyclerAdapter<Tuan, SoTuanViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull SoTuanViewHolder holder, int position, @NonNull Tuan model) {
                 String idWeek =getRef(position).getKey();
-                baiVietDetailRef.child(id).child("week").child(idWeek).addValueEventListener(new ValueEventListener() {
+                thongTinRef.child(idWeek).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String soTuan = snapshot.getKey();
 
-                        holder.soTuan.setText(soTuan);
+                        String sotuan = snapshot.getKey();
+                        holder.soTuan.setText(sotuan);
+
                         holder.setItemClickListener(new ItemClickListener() {
                             @Override
                             public void onClick(View view, int position, boolean isLongClick) {
-                                Toast.makeText(getApplicationContext(),idWeek,Toast.LENGTH_SHORT).show();
 
                                 Query query = baiVietDetailRef;
                                 FirebaseRecyclerOptions<Danhsach> options = new FirebaseRecyclerOptions.Builder<Danhsach>().setQuery(query,Danhsach.class).build();
@@ -99,9 +100,7 @@ public class BaiViet2 extends AppCompatActivity {
                                     @Override
                                     protected void onBindViewHolder(@NonNull DanhSachViewHolder holder, int position, @NonNull Danhsach model) {
                                         String idList =getRef(position).getKey();
-                                        String idw = "1";
-                                        idw = idWeek;
-                                        baiVietDetailRef.child(id).child("list").child(idWeek).child(idList).addValueEventListener(new ValueEventListener() {
+                                        baiVietDetailRef.child(id).child("list").child(idWeek).child(idList).addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 String des = snapshot.child("des").getValue().toString();
@@ -111,6 +110,15 @@ public class BaiViet2 extends AppCompatActivity {
                                                 holder.chuthich.setText(des);
                                                 holder.tieude.setText(name);
                                                 Picasso.get().load(img).into(holder.img);
+
+                                                holder.setItemClickListener(new ItemClickListener() {
+                                                    @Override
+                                                    public void onClick(View view, int position, boolean isLongClick) {
+                                                        Intent intent = new Intent(BaiViet2.this,BaiVietDetailActivity.class);
+                                                        intent.putExtra("idDetail",idList);
+                                                        startActivity(intent);
+                                                    }
+                                                });
                                             }
 
                                             @Override

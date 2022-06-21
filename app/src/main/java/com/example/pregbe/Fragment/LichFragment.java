@@ -47,6 +47,11 @@ public class LichFragment extends Fragment {
 
         txtLich = view.findViewById(R.id.txtLich);
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2023, 1, 1);
+        simpleCalendarView.setMinDate(System.currentTimeMillis());
+        simpleCalendarView.setMaxDate(calendar.getTimeInMillis());
+
         simpleCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
@@ -54,6 +59,7 @@ public class LichFragment extends Fragment {
                 mMonth = String.valueOf(month+1);
                 mYear = String.valueOf(year);
                 txtLich.setText(mDay + "-" + mMonth + "-" + mYear);
+
             }
         });
 

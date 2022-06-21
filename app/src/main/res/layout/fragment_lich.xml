@@ -38,9 +38,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="23dp"
             android:layout_marginEnd="17dp"
-            android:maxDate="07/01/2022"
+            android:background="@color/white"
 
-            android:background="@color/white" />
+            android:maxDate="07/01/2022" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/themLichKham"

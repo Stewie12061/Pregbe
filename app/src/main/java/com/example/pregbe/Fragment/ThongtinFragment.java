@@ -80,7 +80,7 @@ public class ThongtinFragment extends Fragment {
                             @Override
                             public void onClick(View view, int position, boolean isLongClick) {
                                 Intent intent = new Intent(getContext(), BaiViet2.class);
-                                intent.putExtra("id",adapter.getRef(position).getKey());
+                                intent.putExtra("idCate",adapter.getRef(position).getKey());
                                 intent.putExtra("name",name);
                                 startActivity(intent);
                             }

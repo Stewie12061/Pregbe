@@ -10,10 +10,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RVTuan"
-        android:layout_width="348dp"
+        android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView12"
@@ -47,20 +47,20 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="8dp"
         android:text="Tuần"
         android:textColor="@color/blue_400"
         android:textSize="@dimen/lable_5"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/RVTuan"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
+        app:layout_constraintTop_toTopOf="@+id/RVTuan" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDanhSach"
         android:layout_width="match_parent"
-        android:layout_height="620dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="180dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

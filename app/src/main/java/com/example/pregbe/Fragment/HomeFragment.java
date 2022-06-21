@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ReadWriteUserDetails bame = snapshot.getValue(ReadWriteUserDetails.class);
                 readWriteUserDetailsList.add(bame);
-                tenme.setText(readWriteUserDetailsList.get(0).fullName);
+//                tenme.setText(readWriteUserDetailsList.get(0).fullName);
 
             }
 
@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 TenBe baby = snapshot.getValue(TenBe.class);
                 tenBeList.add(baby);
-                TenBe.setText(tenBeList.get(0).tenBaby);
+//                TenBe.setText(tenBeList.get(0).tenBaby);
             }
 
             @Override
