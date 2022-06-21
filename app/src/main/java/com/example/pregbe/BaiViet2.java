@@ -37,7 +37,6 @@ public class BaiViet2 extends AppCompatActivity {
     FirebaseRecyclerAdapter<Tuan, SoTuanViewHolder> adapterTuan;
     FirebaseRecyclerAdapter<Danhsach, DanhSachViewHolder> adapterDanhSach;
     String id;
-    String id3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +62,15 @@ public class BaiViet2 extends AppCompatActivity {
                 LinearLayoutManager.VERTICAL, false));
 
         id = getIntent().getStringExtra("id");
-        id3 = id;
 
         getTuan();
-        getDanhSach();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getTuan();
     }
 
     private void getTuan() {
@@ -77,8 +80,8 @@ public class BaiViet2 extends AppCompatActivity {
         adapterTuan = new FirebaseRecyclerAdapter<Tuan, SoTuanViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull SoTuanViewHolder holder, int position, @NonNull Tuan model) {
-                String id2 =getRef(position).getKey();
-                baiVietDetailRef.child(id).child("week").child(id2).addValueEventListener(new ValueEventListener() {
+                String idWeek =getRef(position).getKey();
+                baiVietDetailRef.child(id).child("week").child(idWeek).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String soTuan = snapshot.getKey();
@@ -87,8 +90,47 @@ public class BaiViet2 extends AppCompatActivity {
                         holder.setItemClickListener(new ItemClickListener() {
                             @Override
                             public void onClick(View view, int position, boolean isLongClick) {
-                                 id3 = adapterTuan.getRef(position).getKey();
-                                Toast.makeText(getApplicationContext(),id3,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),idWeek,Toast.LENGTH_SHORT).show();
+
+                                Query query = baiVietDetailRef;
+                                FirebaseRecyclerOptions<Danhsach> options = new FirebaseRecyclerOptions.Builder<Danhsach>().setQuery(query,Danhsach.class).build();
+
+                                adapterDanhSach = new FirebaseRecyclerAdapter<Danhsach, DanhSachViewHolder>(options) {
+                                    @Override
+                                    protected void onBindViewHolder(@NonNull DanhSachViewHolder holder, int position, @NonNull Danhsach model) {
+                                        String idList =getRef(position).getKey();
+                                        String idw = "1";
+                                        idw = idWeek;
+                                        baiVietDetailRef.child(id).child("list").child(idWeek).child(idList).addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                String des = snapshot.child("des").getValue().toString();
+                                                String img = snapshot.child("img").getValue().toString();
+                                                String name = snapshot.child("name").getValue().toString();
+
+                                                holder.chuthich.setText(des);
+                                                holder.tieude.setText(name);
+                                                Picasso.get().load(img).into(holder.img);
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+
+                                    }
+
+                                    @NonNull
+                                    @Override
+                                    public DanhSachViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                                        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.danhsach_item,parent,false);
+                                        DanhSachViewHolder viewHolder = new DanhSachViewHolder(v);
+                                        return viewHolder;
+                                    }
+                                };
+                                RVdanhsach.setAdapter(adapterDanhSach);
+                                adapterDanhSach.startListening();
                             }
                         });
                     }
@@ -112,43 +154,4 @@ public class BaiViet2 extends AppCompatActivity {
         adapterTuan.startListening();
     }
 
-    private void getDanhSach() {
-        Query query = baiVietDetailRef.child(id).child("list");
-        FirebaseRecyclerOptions<Danhsach> options = new FirebaseRecyclerOptions.Builder<Danhsach>().setQuery(query,Danhsach.class).build();
-
-        adapterDanhSach = new FirebaseRecyclerAdapter<Danhsach, DanhSachViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull DanhSachViewHolder holder, int position, @NonNull Danhsach model) {
-                String idList =getRef(position).getKey();
-                baiVietDetailRef.child(id).child("list").child(idList).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String des = snapshot.child("des").getValue().toString();
-                        String img = snapshot.child("img").getValue().toString();
-                        String name = snapshot.child("name").getValue().toString();
-
-                        holder.chuthich.setText(des);
-                        holder.tieude.setText(name);
-                        Picasso.get().load(img).into(holder.img);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-            }
-
-            @NonNull
-            @Override
-            public DanhSachViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.danhsach_item,parent,false);
-                DanhSachViewHolder viewHolder = new DanhSachViewHolder(v);
-                return viewHolder;
-            }
-        };
-        RVdanhsach.setAdapter(adapterDanhSach);
-        adapterDanhSach.startListening();
-    }
 }
