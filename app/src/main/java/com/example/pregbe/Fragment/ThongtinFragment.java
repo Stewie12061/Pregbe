@@ -79,6 +79,7 @@ public class ThongtinFragment extends Fragment {
 
         RVsearch = view.findViewById(R.id.rvSearch);
         RVsearch.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        RVsearch.setVisibility(View.GONE);
 
         searchView = view.findViewById(R.id.searchView);
         searchView.setOnSearchClickListener(new View.OnClickListener() {

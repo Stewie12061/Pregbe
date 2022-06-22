@@ -224,40 +224,42 @@ public class BaiVietDetailActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user.getUid();
 
-        favoriteRef.child(userId).child(idCate+idTuan+idDetail)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        isInMyFavorite = snapshot.exists();
-                        if (isInMyFavorite){
-                            fav.setBackgroundResource(R.drawable.save_true);
-                        }else {
-                            fav.setBackgroundResource(R.drawable.save_false);
+        if (idDetail!= null){
+            favoriteRef.child(userId).child(idCate+idTuan+idDetail)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            isInMyFavorite = snapshot.exists();
+                            if (isInMyFavorite){
+                                fav.setBackgroundResource(R.drawable.save_true);
+                            }else {
+                                fav.setBackgroundResource(R.drawable.save_false);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-
-        favoriteRef.child(userId).child(idFromFav)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        isInMyFavorite = snapshot.exists();
-                        if (isInMyFavorite){
-                            fav.setBackgroundResource(R.drawable.save_true);
-                        }else {
-                            fav.setBackgroundResource(R.drawable.save_false);
                         }
-                    }
+                    });
+        }else {
+            favoriteRef.child(userId).child(idFromFav)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            isInMyFavorite = snapshot.exists();
+                            if (isInMyFavorite){
+                                fav.setBackgroundResource(R.drawable.save_true);
+                            }else {
+                                fav.setBackgroundResource(R.drawable.save_false);
+                            }
+                        }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
+        }
     }
 }
