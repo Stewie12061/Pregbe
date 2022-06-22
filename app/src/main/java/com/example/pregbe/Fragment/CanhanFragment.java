@@ -17,6 +17,8 @@ import com.example.pregbe.BaiVietDaLuuActivity;
 import com.example.pregbe.GioiThieu.DangNhap;
 import com.example.pregbe.GioiThieu.ReadWriteUserDetails;
 import com.example.pregbe.R;
+import com.example.pregbe.ThongTinBeActivity;
+import com.example.pregbe.ThongTinMeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 public class CanhanFragment extends Fragment {
     Button sighOut;
     FirebaseAuth firebaseAuth;
-    LinearLayout baiVietFav;
+    LinearLayout baiVietFav, thongTinBe, thongTinMe;
     TextView tenme;
 
     FirebaseDatabase firebaseDatabase;
@@ -86,6 +88,24 @@ public class CanhanFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        thongTinBe = view.findViewById(R.id.thongtinBe);
+        thongTinBe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ThongTinBeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        thongTinMe = view.findViewById(R.id.thongtinMe);
+        thongTinMe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ThongTinMeActivity.class);
+                startActivity(intent);
             }
         });
     }

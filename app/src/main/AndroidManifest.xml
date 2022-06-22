@@ -8,6 +8,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pregbe">
         <activity
+            android:name=".ThongTinBeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ThongTinMeActivity"
+            android:exported="true" />
+        <activity
             android:name=".BaiVietDaLuuActivity"
             android:exported="true" />
         <activity

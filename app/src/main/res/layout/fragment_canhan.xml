@@ -102,6 +102,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <LinearLayout
+                                android:id="@+id/thongtinMe"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
@@ -193,6 +194,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <LinearLayout
+                                android:id="@+id/thongtinBe"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
@@ -211,7 +213,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="Lịch khám"
+                                    android:text="Thông tin của bé"
                                     android:textColor="@color/blue_400"
                                     android:textSize="@dimen/lable_3"
                                     android:textStyle="bold" />
