@@ -85,6 +85,15 @@ public class BaiVietDaLuuActivity extends AppCompatActivity {
                         holder.chuthich.setText(Des);
                         Picasso.get().load(Img).into(holder.image);
 
+                        holder.setItemClickListener(new ItemClickListener() {
+                            @Override
+                            public void onClick(View view, int position, boolean isLongClick) {
+                                Intent intent = new Intent(BaiVietDaLuuActivity.this, BaiVietDetailActivity.class);
+                                intent.putExtra("idFromFav", adapter.getRef(position).getKey());
+                                startActivity(intent);
+                            }
+                        });
+
                         holder.favoriteCheck(id);
                         holder.fav.setOnClickListener(new View.OnClickListener() {
                             @Override

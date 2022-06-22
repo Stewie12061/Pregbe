@@ -29,7 +29,7 @@ public class BaiVietDetailActivity extends AppCompatActivity {
     TextView goback;
 
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference listDetailRef, favoriteRef;
+    DatabaseReference listDetailRef, favoriteRef,searchRef;
 
     public Boolean isInMyFavorite = false;
     TextView fav;
@@ -38,6 +38,7 @@ public class BaiVietDetailActivity extends AppCompatActivity {
     TextView nameListDetail, desListDetail;
 
     String idDetail, idTuan, idCate;
+    String idFromFav;
 
     Favorite favorite;
     @Override
@@ -48,6 +49,7 @@ public class BaiVietDetailActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app");
         listDetailRef = firebaseDatabase.getReference("ListDetail");
         favoriteRef = firebaseDatabase.getReference("Favorite");
+        searchRef = firebaseDatabase.getReference("Search");
 
         favorite = new Favorite();
 
@@ -66,13 +68,87 @@ public class BaiVietDetailActivity extends AppCompatActivity {
         idDetail = getIntent().getStringExtra("idDetail");
         idTuan = getIntent().getStringExtra("idTuan");
         idCate = getIntent().getStringExtra("idCate");
+        idFromFav = getIntent().getStringExtra("idFromFav");
         if (idDetail != null){
             getListDetail(idDetail,idTuan,idCate);
         }
+        else{
+            getListDetailFromFav(idFromFav);
+        }
 
     }
+
+    private void getListDetailFromFav(String idFromFav) {
+        searchRef.child(idFromFav).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String name =snapshot.child("name").getValue().toString();
+                String des = snapshot.child("des").getValue().toString();
+                String img = snapshot.child("img").getValue().toString();
+
+                nameListDetail.setText(name);
+                desListDetail.setText(des);
+                Picasso.get().load(img).into(imgListDetail);
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String currentUserId = user.getUid();
+                favoriteCheck();
+
+                favorite.setName(name);
+                favorite.setDes(des);
+                favorite.setImg(img);
+
+                fav.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (isInMyFavorite){
+                            favoriteRef.child(currentUserId).child(idFromFav).removeValue()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            String text = "Remove"+" "+name+" "+"from favorite list";
+                                            Spannable centeredText = new SpannableString(text);
+                                            centeredText.setSpan(
+                                                    new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                                                    0, text.length() - 1,
+                                                    Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                                            );
+
+                                            Toast.makeText(BaiVietDetailActivity.this, centeredText, Toast.LENGTH_SHORT).show();
+//                                            Toast.makeText(ItemDetailActivity.this, "Removed from favorite list", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }else {
+                            favoriteRef.child(currentUserId).child(idFromFav).setValue(favorite)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            String text = "Add"+" "+name+" "+"to favorite list";
+                                            Spannable centeredText = new SpannableString(text);
+                                            centeredText.setSpan(
+                                                    new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                                                    0, text.length() - 1,
+                                                    Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                                            );
+
+                                            Toast.makeText(BaiVietDetailActivity.this, centeredText, Toast.LENGTH_SHORT).show();
+//                                            Toast.makeText(ItemDetailActivity.this, "Added to favorite list", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void getListDetail(String idDetail, String idTuan, String idCate){
-        listDetailRef.child(idCate).child("week").child(idTuan).child(idDetail).addValueEventListener(new ValueEventListener() {
+        listDetailRef.child(idCate).child("week").child(idTuan).child(idDetail).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String name =snapshot.child("name").getValue().toString();
@@ -166,5 +242,22 @@ public class BaiVietDetailActivity extends AppCompatActivity {
                     }
                 });
 
+        favoriteRef.child(userId).child(idFromFav)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        isInMyFavorite = snapshot.exists();
+                        if (isInMyFavorite){
+                            fav.setBackgroundResource(R.drawable.save_true);
+                        }else {
+                            fav.setBackgroundResource(R.drawable.save_false);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 }

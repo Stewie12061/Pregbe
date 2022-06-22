@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pregbe.ItemClickListener;
 import com.example.pregbe.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,13 +18,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class FavoriteViewHolder extends RecyclerView.ViewHolder {
+public class FavoriteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     public ImageView image;
     public TextView tieude, chuthich, fav;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference favoriteRef;
     public boolean isInMyFavorite = false;
+    private ItemClickListener itemClickListener;
 
     public FavoriteViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -33,7 +35,7 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 
         chuthich = itemView.findViewById(R.id.chuthichFav);
 
-
+        itemView.setOnClickListener(this);
     }
 
     public void favoriteCheck(String id) {
@@ -62,7 +64,12 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 
                     }
                 });
-
+    }
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+    public void onClick(View v) {
+        itemClickListener.onClick(v, getBindingAdapterPosition(),false);
     }
 
 }
