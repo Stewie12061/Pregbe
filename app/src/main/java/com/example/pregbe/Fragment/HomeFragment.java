@@ -93,7 +93,7 @@ public class HomeFragment extends Fragment {
 //                tuanThai.setText(sotuan);
 //                TenBe.setText(tenBe);
                 tuanThai.setText(snapshot.child("soTuan").getValue().toString());
-                TenBe.setText(snapshot.child("tenBe").getValue().toString());
+                TenBe.setText(snapshot.child("tenBaby").getValue().toString());
             }
 
             @Override

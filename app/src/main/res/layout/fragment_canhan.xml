@@ -63,23 +63,6 @@
                     android:textSize="@dimen/lable_3"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_below="@+id/image_playing"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="23dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="239dp"
-                    android:layout_marginBottom="21dp"
-                    android:text="Thông tin chi tiết"
-                    android:textColor="@color/blue_400"
-                    android:textSize="@dimen/lable_5"
-                    android:textStyle="bold" />
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,15 +15,25 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pregbe.BaiVietDaLuuActivity;
 import com.example.pregbe.GioiThieu.DangNhap;
+import com.example.pregbe.GioiThieu.ReadWriteUserDetails;
 import com.example.pregbe.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class CanhanFragment extends Fragment {
     Button sighOut;
     FirebaseAuth firebaseAuth;
     LinearLayout baiVietFav;
+    TextView tenme;
 
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference referenceProfile;
+    ReadWriteUserDetails readWriteUserDetails;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,6 +45,9 @@ public class CanhanFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app");
+        referenceProfile = firebaseDatabase.getReference("Users");
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -53,6 +67,25 @@ public class CanhanFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), BaiVietDaLuuActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        readWriteUserDetails = new ReadWriteUserDetails();
+
+        tenme = view.findViewById(R.id.username);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUserId = user.getUid();
+        referenceProfile.child(currentUserId).child("Parent").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                readWriteUserDetails = snapshot.getValue(ReadWriteUserDetails.class);
+                String tenMe = readWriteUserDetails.fullName;
+                tenme.setText(tenMe);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
