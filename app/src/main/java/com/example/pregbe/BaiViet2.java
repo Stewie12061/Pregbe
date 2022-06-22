@@ -80,14 +80,14 @@ public class BaiViet2 extends AppCompatActivity {
     }
 
     private void getTuan() {
-        Query query = thongTinRef;
+        Query query = baiVietDetailRef;
         FirebaseRecyclerOptions<Tuan> options = new FirebaseRecyclerOptions.Builder<Tuan>().setQuery(query,Tuan.class).build();
 
         adapterTuan = new FirebaseRecyclerAdapter<Tuan, SoTuanViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull SoTuanViewHolder holder, int position, @NonNull Tuan model) {
                 String idWeek =getRef(position).getKey();
-                thongTinRef.child(idWeek).addListenerForSingleValueEvent(new ValueEventListener() {
+                baiVietDetailRef.child(id).child("list").child(idWeek).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 

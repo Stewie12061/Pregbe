@@ -29,7 +29,7 @@ public class BaiVietDetailActivity extends AppCompatActivity {
     TextView goback;
 
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference listDetailRef, favoriteRef,searchRef;
+    DatabaseReference favoriteRef,searchRef,baiVietDetailRef;
 
     public Boolean isInMyFavorite = false;
     TextView fav;
@@ -47,7 +47,7 @@ public class BaiVietDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bai_viet_detail);
 
         firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app");
-        listDetailRef = firebaseDatabase.getReference("ListDetail");
+        baiVietDetailRef = firebaseDatabase.getReference("BaiVietDetail");
         favoriteRef = firebaseDatabase.getReference("Favorite");
         searchRef = firebaseDatabase.getReference("Search");
 
@@ -148,7 +148,7 @@ public class BaiVietDetailActivity extends AppCompatActivity {
     }
 
     private void getListDetail(String idDetail, String idTuan, String idCate){
-        listDetailRef.child(idCate).child("week").child(idTuan).child(idDetail).addListenerForSingleValueEvent(new ValueEventListener() {
+        baiVietDetailRef.child(idCate).child("list").child(idTuan).child(idDetail).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String name =snapshot.child("name").getValue().toString();

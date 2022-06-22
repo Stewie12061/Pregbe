@@ -5,7 +5,7 @@
     android:id="@+id/cardview"
     android:layout_width="match_parent"
     android:layout_margin="16dp"
-    android:layout_height="300dp"
+    android:layout_height="200dp"
     android:elevation="10dp"
     app:cardCornerRadius="20dp" >
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,12 +16,12 @@
             android:id="@+id/txtTieuDe"
             android:layout_width="57dp"
             android:layout_height="17dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="28dp"
             android:layout_marginTop="16dp"
             android:text="Thêm tiêu đề"
             android:textSize="18dp"
             app:layout_constraintStart_toEndOf="@+id/imageView5"
-            app:layout_constraintTop_toBottomOf="@+id/updateLich" />
+            app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
         <TextView
             android:id="@+id/txtDes"
@@ -38,9 +38,9 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:src="@drawable/cuate"
-            app:layout_constraintBottom_toTopOf="@+id/deleteLich"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/updateLich" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtLich"
@@ -63,48 +63,25 @@
             app:layout_constraintTop_toBottomOf="@+id/txtLich" />
 
         <LinearLayout
-            android:id="@+id/updateLich"
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:orientation="horizontal"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/orange_300">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Chỉnh sửa đặt lịch"
-                android:textSize="18dp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:drawableStart="@drawable/editing"
-                android:layout_gravity="center"
-                android:gravity="center"/>
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/deleteLich"
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:gravity="center"
-            android:orientation="horizontal"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
             android:background="@color/orange_500"
+            android:gravity="center"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Xóa đặt lịch"
-                android:textSize="18dp"
-                android:drawableStart="@drawable/delete"
-                android:textColor="@color/white"
-                android:textStyle="bold"
                 android:layout_gravity="center"
-                android:gravity="center"/>
+                android:drawableStart="@drawable/delete"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

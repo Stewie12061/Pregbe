@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,24 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pregbe.Adapter.DanhSachViewHolder;
+import com.example.pregbe.Adapter.DatLichViewHolder;
+import com.example.pregbe.Model.DatLich;
 import com.example.pregbe.R;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -30,7 +46,11 @@ public class LichFragment extends Fragment {
     private int mHour, mMinute;
 
     Button themLichKham;
-    TextView txtTime, txtLich, txtTieuDe, txtNoiDung;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference datLichRef;
+
+    RecyclerView rvDatLich;
 
     public LichFragment() {
     }
@@ -43,6 +63,9 @@ public class LichFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lich, container, false);
+
+        firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app");
+        datLichRef = firebaseDatabase.getReference("Dat Lich");
 
         CalendarView simpleCalendarView = (CalendarView) view.findViewById(R.id.calendarView); // get the reference of CalendarView
 
@@ -60,8 +83,6 @@ public class LichFragment extends Fragment {
             }
         });
 
-        txtTime = view.findViewById(R.id.txtTime);
-
         themLichKham = view.findViewById(R.id.themLichKham);
         themLichKham.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,9 +92,65 @@ public class LichFragment extends Fragment {
 
         });
 
-
+        rvDatLich = view.findViewById(R.id.rvDatLich);
+        rvDatLich.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         return (view);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getDatLich();
+    }
+
+    private void getDatLich() {
+        FirebaseRecyclerOptions<DatLich> options = new FirebaseRecyclerOptions.Builder<DatLich>().setQuery(datLichRef,DatLich.class).build();
+        FirebaseRecyclerAdapter<DatLich,DatLichViewHolder> adapter = new FirebaseRecyclerAdapter<DatLich, DatLichViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull DatLichViewHolder holder, int position, @NonNull DatLich model) {
+                String idDatLich = getRef(position).getKey();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String currentUserId = user.getUid();
+
+                datLichRef.child(currentUserId).child(idDatLich).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String tieude = snapshot.child("tieuDe").getValue().toString();
+                        String ngaydat = snapshot.child("ngayDat").getValue().toString();
+                        String mota = snapshot.child("moTa").getValue().toString();
+                        String tgDat = snapshot.child("tgDat").getValue().toString();
+
+                        holder.tieuDe.setText(tieude);
+                        holder.ngayDat.setText(ngaydat);
+                        holder.moTa.setText(mota);
+                        holder.thoiGian.setText(tgDat);
+
+                        holder.delete.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                datLichRef.child(currentUserId).child(idDatLich).removeValue();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+
+            @NonNull
+            @Override
+            public DatLichViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dat_lich,parent,false);
+                DatLichViewHolder viewHolder = new DatLichViewHolder(v);
+                return viewHolder;
+            }
+        };
+        rvDatLich.setAdapter(adapter);
+        adapter.startListening();
     }
 
     private void displayDialog() {
@@ -86,9 +163,11 @@ public class LichFragment extends Fragment {
 
         LinearLayout settime = dialogView.findViewById(R.id.addTime);
         EditText edtTime = dialogView.findViewById(R.id.edtTime);
-        txtLich = dialogView.findViewById(R.id.ngayDatLich);
-        txtLich.setText(mDay + "-" + mMonth + "-" + mYear);
+        EditText edtTieuDe = dialogView.findViewById(R.id.edtTieuDe);
+        EditText edtMota = dialogView.findViewById(R.id.edtMota);
+        EditText edtNgayDatLich = dialogView.findViewById(R.id.edtNgayDatLich);
 
+        edtNgayDatLich.setText(mDay + "-" + mMonth + "-" + mYear);
 
         settime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +189,40 @@ public class LichFragment extends Fragment {
                             }
                         }, mHour, mMinute, false);
                 timePickerDialog.show();
+            }
+        });
+
+        Button xacNhan = dialogView.findViewById(R.id.addLich);
+        xacNhan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(edtTieuDe.getText().toString().trim())){
+                    edtTieuDe.setError("You have to fill this information!");
+                    edtTieuDe.requestFocus();
+                }else if(TextUtils.isEmpty(edtMota.getText().toString().trim())){
+                    edtMota.setError("You have to fill this information!");
+                    edtMota.requestFocus();
+                }else if(TextUtils.isEmpty(edtMota.getText().toString().trim())){
+                    edtMota.setError("You have to fill this information!");
+                    edtMota.requestFocus();
+                }else if(TextUtils.isEmpty(edtTime.getText().toString().trim())){
+                    edtTime.setError("You have to fill this information!");
+                    edtTime.requestFocus();
+                }else {
+                    firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app");
+                    datLichRef = firebaseDatabase.getReference("Dat Lich");
+
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    String currentUserId = user.getUid();
+
+                    DatLich datLich = new DatLich(edtNgayDatLich.getText().toString(),edtTime.getText().toString(),edtTieuDe.getText().toString(),edtMota.getText().toString());
+
+                    datLichRef.child(currentUserId).push().setValue(datLich);
+
+                    Toast.makeText(getContext(),"Đặt lịch thành công",Toast.LENGTH_SHORT).show();
+                    alertDialog.dismiss();
+
+                }
             }
         });
 

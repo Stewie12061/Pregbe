@@ -19,22 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textStyle="bold"
-                android:text="Ngày đặt lịch:"
-                android:layout_marginEnd="8dp"
-                android:textSize="18dp"/>
-
-            <TextView
-                android:id="@+id/ngayDatLich"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:text="11-11-2001"/>
+                android:text="Nhập Ngày đặt lịch" />
+
+            <EditText
+                android:id="@+id/edtNgayDatLich"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nhập thông tin" />
         </LinearLayout>
 
         <LinearLayout
@@ -49,6 +45,7 @@
                 android:text="Nhập Tiêu đề" />
 
             <EditText
+                android:id="@+id/edtTieuDe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nhập thông tin" />
@@ -66,6 +63,7 @@
                 android:text="Nhập mô tả bệnh" />
 
             <EditText
+                android:id="@+id/edtMota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nhập thông tin" />
