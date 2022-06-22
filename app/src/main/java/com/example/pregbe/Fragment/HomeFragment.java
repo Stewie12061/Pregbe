@@ -1,5 +1,6 @@
 package com.example.pregbe.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pregbe.Adapter.DatLichViewHolder;
 import com.example.pregbe.Adapter.SoTuanViewHolder;
 import com.example.pregbe.GioiThieu.ReadWriteUserDetails;
 import com.example.pregbe.ItemClickListener;
+import com.example.pregbe.Model.DatLich;
 import com.example.pregbe.Model.Tuan;
 import com.example.pregbe.R;
+import com.example.pregbe.Update_lich_Activity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +29,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -33,14 +38,14 @@ public class HomeFragment extends Fragment {
     FirebaseUser firebaseUser;
     FirebaseAuth mAuth;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference referenceProfile, thongTinRef;
+    DatabaseReference referenceProfile, thongTinRef, datLichRef;
 
     TextView tenme, TenBe, SoKy, ChieuDai, MoTa, tuanThai;
     FirebaseRecyclerAdapter<Tuan, SoTuanViewHolder> adapter;
     String id2;
     ImageView HinhAnh;
 
-    RecyclerView rvTuanThai;
+    RecyclerView rvTuanThai, rvDatLich;
 
     ReadWriteUserDetails readWriteUserDetails;
 
@@ -52,11 +57,13 @@ public class HomeFragment extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app");
         referenceProfile = firebaseDatabase.getReference("Users");
         thongTinRef = firebaseDatabase.getReference("ThongTin");
+        datLichRef = firebaseDatabase.getReference("Dat Lich");
 
         tenme = view.findViewById(R.id.username);
         TenBe = view.findViewById(R.id.TenBe);
 
         rvTuanThai = view.findViewById(R.id.rvTuanThai);
+        rvDatLich = view.findViewById(R.id.rvDatLichHome);
 
         HinhAnh = view.findViewById(R.id.hinhAnhBe);
         ChieuDai = view.findViewById(R.id.chieuDaiBe);
@@ -104,15 +111,60 @@ public class HomeFragment extends Fragment {
 
 
         rvTuanThai.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-
-        getTuanThai();
-        getThongTin();
+        rvDatLich.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         return view;
     }
 
-    private void getThongTin() {
+    @Override
+    public void onStart() {
+        super.onStart();
+        getTuanThai();
+        getDatLich();
+    }
 
+    private void getDatLich() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUserId = user.getUid();
+
+        Query query = datLichRef.child(currentUserId);
+        FirebaseRecyclerOptions<DatLich> options = new FirebaseRecyclerOptions.Builder<DatLich>().setQuery(query,DatLich.class).build();
+        FirebaseRecyclerAdapter<DatLich, DatLichViewHolder> adapter = new FirebaseRecyclerAdapter<DatLich, DatLichViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull DatLichViewHolder holder, int position, @NonNull DatLich model) {
+                String idDatLich = getRef(position).getKey();
+
+                datLichRef.child(currentUserId).child(idDatLich).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String tieude = snapshot.child("tieuDe").getValue().toString();
+                        String ngaydat = snapshot.child("ngayDat").getValue().toString();
+                        String mota = snapshot.child("moTa").getValue().toString();
+                        String tgDat = snapshot.child("tgDat").getValue().toString();
+
+                        holder.tieuDe.setText(tieude);
+                        holder.ngayDat.setText(ngaydat);
+                        holder.moTa.setText(mota);
+                        holder.thoiGian.setText(tgDat);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+
+            @NonNull
+            @Override
+            public DatLichViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dat_lich_home,parent,false);
+                DatLichViewHolder viewHolder = new DatLichViewHolder(v);
+                return viewHolder;
+            }
+        };
+        rvDatLich.setAdapter(adapter);
+        adapter.startListening();
     }
 
     private void getTuanThai() {

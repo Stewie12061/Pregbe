@@ -8,6 +8,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pregbe">
         <activity
+            android:name=".Update_lich_Activity"
+            android:exported="true" />
+        <activity
             android:name=".ThongTinBeActivity"
             android:exported="true" />
         <activity

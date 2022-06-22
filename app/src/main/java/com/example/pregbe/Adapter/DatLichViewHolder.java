@@ -8,11 +8,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pregbe.ItemClickListener;
 import com.example.pregbe.R;
 
-public class DatLichViewHolder extends RecyclerView.ViewHolder {
+public class DatLichViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     public TextView tieuDe, moTa, ngayDat, thoiGian;
     public LinearLayout delete;
+    private ItemClickListener itemClickListener;
     public DatLichViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -22,5 +24,15 @@ public class DatLichViewHolder extends RecyclerView.ViewHolder {
         thoiGian = itemView.findViewById(R.id.txtTime);
 
         delete = itemView.findViewById(R.id.deleteLich);
+        itemView.setOnClickListener(this);
+
+    }
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        itemClickListener.onClick(v, getBindingAdapterPosition(),false);
     }
 }

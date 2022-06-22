@@ -3,6 +3,7 @@ package com.example.pregbe.Fragment;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -24,8 +25,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pregbe.Adapter.DanhSachViewHolder;
 import com.example.pregbe.Adapter.DatLichViewHolder;
+import com.example.pregbe.ItemClickListener;
 import com.example.pregbe.Model.DatLich;
 import com.example.pregbe.R;
+import com.example.pregbe.Update_lich_Activity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -140,6 +143,15 @@ public class LichFragment extends Fragment {
                             @Override
                             public void onClick(View v) {
                                 datLichRef.child(currentUserId).child(idDatLich).removeValue();
+                            }
+                        });
+
+                        holder.setItemClickListener(new ItemClickListener() {
+                            @Override
+                            public void onClick(View view, int position, boolean isLongClick) {
+                                Intent intent = new Intent(getContext(), Update_lich_Activity.class);
+                                intent.putExtra("idLich",idDatLich);
+                                startActivity(intent);
                             }
                         });
                     }
