@@ -80,11 +80,11 @@
                 android:layout_height="match_parent"
                 android:textSize="18dp"
                 android:text="Chọn thời gian đặt lịch"/>
-            <EditText
+            <TextView
                 android:id="@+id/edtTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Thời gian khám"
+                android:text="Thời gian khám"
                 android:textSize="18dp"/>
         </LinearLayout>
     </LinearLayout>

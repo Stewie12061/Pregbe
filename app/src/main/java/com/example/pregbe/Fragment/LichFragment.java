@@ -34,6 +34,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
@@ -51,6 +52,7 @@ public class LichFragment extends Fragment {
     DatabaseReference datLichRef;
 
     RecyclerView rvDatLich;
+    Boolean isPickDay=false;
 
     public LichFragment() {
     }
@@ -80,6 +82,7 @@ public class LichFragment extends Fragment {
                 mDay = String.valueOf(dayOfMonth);
                 mMonth = String.valueOf(month+1);
                 mYear = String.valueOf(year);
+                isPickDay=true;
             }
         });
 
@@ -87,7 +90,12 @@ public class LichFragment extends Fragment {
         themLichKham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayDialog();
+                if (isPickDay==true){
+                    displayDialog();
+                }
+                else {
+                    Toast.makeText(getContext(),"You have to pick day first",Toast.LENGTH_SHORT).show();
+                }
             }
 
         });
@@ -105,13 +113,15 @@ public class LichFragment extends Fragment {
     }
 
     private void getDatLich() {
-        FirebaseRecyclerOptions<DatLich> options = new FirebaseRecyclerOptions.Builder<DatLich>().setQuery(datLichRef,DatLich.class).build();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUserId = user.getUid();
+
+        Query query = datLichRef.child(currentUserId);
+        FirebaseRecyclerOptions<DatLich> options = new FirebaseRecyclerOptions.Builder<DatLich>().setQuery(query,DatLich.class).build();
         FirebaseRecyclerAdapter<DatLich,DatLichViewHolder> adapter = new FirebaseRecyclerAdapter<DatLich, DatLichViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull DatLichViewHolder holder, int position, @NonNull DatLich model) {
                 String idDatLich = getRef(position).getKey();
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                String currentUserId = user.getUid();
 
                 datLichRef.child(currentUserId).child(idDatLich).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -162,7 +172,7 @@ public class LichFragment extends Fragment {
         AlertDialog alertDialog = builder.create();
 
         LinearLayout settime = dialogView.findViewById(R.id.addTime);
-        EditText edtTime = dialogView.findViewById(R.id.edtTime);
+        TextView edtTime = dialogView.findViewById(R.id.edtTime);
         EditText edtTieuDe = dialogView.findViewById(R.id.edtTieuDe);
         EditText edtMota = dialogView.findViewById(R.id.edtMota);
         EditText edtNgayDatLich = dialogView.findViewById(R.id.edtNgayDatLich);
