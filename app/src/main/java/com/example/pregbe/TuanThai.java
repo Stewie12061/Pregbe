@@ -65,11 +65,6 @@ public class TuanThai extends AppCompatActivity implements TuanThaiAdapter.Liste
         tieptheo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app/");
-                DatabaseReference referenceProfile = firebaseDatabase.getReference("Users");
-
-                readWriteUserDetails = new ReadWriteUserDetails(tenThaiNhi.getText().toString());
-                referenceProfile.child(firebaseUser.getUid()).child("Baby").setValue(readWriteUserDetails);
                 Intent intent = new Intent(TuanThai.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -82,8 +77,7 @@ public class TuanThai extends AppCompatActivity implements TuanThaiAdapter.Liste
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app/");
         DatabaseReference referenceProfile = firebaseDatabase.getReference("Users");
 
-        int soTuan = Integer.parseInt(sotuan);
-        readWriteUserDetails = new ReadWriteUserDetails(soTuan);
+        readWriteUserDetails = new ReadWriteUserDetails(tenThaiNhi.getText().toString(),sotuan);
         referenceProfile.child(firebaseUser.getUid()).child("Baby").setValue(readWriteUserDetails);
 
     }

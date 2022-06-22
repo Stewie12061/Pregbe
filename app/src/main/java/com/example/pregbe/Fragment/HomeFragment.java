@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pregbe.Adapter.SoTuanViewHolder;
 import com.example.pregbe.GioiThieu.ReadWriteUserDetails;
 import com.example.pregbe.ItemClickListener;
-import com.example.pregbe.Model.TenBe;
 import com.example.pregbe.Model.Tuan;
 import com.example.pregbe.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -28,9 +27,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class HomeFragment extends Fragment {
@@ -45,6 +41,8 @@ public class HomeFragment extends Fragment {
     ImageView HinhAnh;
 
     RecyclerView rvTuanThai;
+
+    ReadWriteUserDetails readWriteUserDetails;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,6 +63,8 @@ public class HomeFragment extends Fragment {
         SoKy = view.findViewById(R.id.soKyBe);
         MoTa = view.findViewById(R.id.moTaBe);
 
+        readWriteUserDetails = new ReadWriteUserDetails();
+
         tuanThai = view.findViewById(R.id.tuanThai);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -73,8 +73,8 @@ public class HomeFragment extends Fragment {
         referenceProfile.child(currentUserId).child("Parent").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ReadWriteUserDetails readWriteUserDetails =snapshot.getValue(ReadWriteUserDetails.class);
-                String tenMe =readWriteUserDetails.fullName;
+                readWriteUserDetails =snapshot.getValue(ReadWriteUserDetails.class);
+                String tenMe = readWriteUserDetails.fullName;
                 tenme.setText(tenMe);
             }
 
@@ -87,12 +87,13 @@ public class HomeFragment extends Fragment {
         referenceProfile.child(currentUserId).child("Baby").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ReadWriteUserDetails readWriteUserDetails =snapshot.getValue(ReadWriteUserDetails.class);
-                String tenBe =readWriteUserDetails.tenBe;
-                int tuanthai = readWriteUserDetails.soTuan;
-                String tuanthaiString = Integer.toString(tuanthai);
-                tuanThai.setText(tuanthaiString);
-                TenBe.setText(tenBe);
+//                readWriteUserDetails =snapshot.getValue(ReadWriteUserDetails.class);
+//                String tenBe =readWriteUserDetails.tenBe;
+//                String sotuan = readWriteUserDetails.soTuan;
+//                tuanThai.setText(sotuan);
+//                TenBe.setText(tenBe);
+                tuanThai.setText(snapshot.child("soTuan").getValue().toString());
+                TenBe.setText(snapshot.child("tenBe").getValue().toString());
             }
 
             @Override
