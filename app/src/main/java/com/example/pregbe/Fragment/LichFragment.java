@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -45,8 +46,6 @@ public class LichFragment extends Fragment {
 
         CalendarView simpleCalendarView = (CalendarView) view.findViewById(R.id.calendarView); // get the reference of CalendarView
 
-        txtLich = view.findViewById(R.id.txtLich);
-
         Calendar calendar = Calendar.getInstance();
         calendar.set(2023, 1, 1);
         simpleCalendarView.setMinDate(System.currentTimeMillis());
@@ -58,8 +57,6 @@ public class LichFragment extends Fragment {
                 mDay = String.valueOf(dayOfMonth);
                 mMonth = String.valueOf(month+1);
                 mYear = String.valueOf(year);
-                txtLich.setText(mDay + "-" + mMonth + "-" + mYear);
-
             }
         });
 
@@ -87,8 +84,12 @@ public class LichFragment extends Fragment {
         builder.setView(dialogView);
         AlertDialog alertDialog = builder.create();
 
-        TextView settime = dialogView.findViewById(R.id.addTime);
+        LinearLayout settime = dialogView.findViewById(R.id.addTime);
         EditText edtTime = dialogView.findViewById(R.id.edtTime);
+        txtLich = dialogView.findViewById(R.id.ngayDatLich);
+        txtLich.setText(mDay + "-" + mMonth + "-" + mYear);
+
+
         settime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +106,6 @@ public class LichFragment extends Fragment {
                             public void onTimeSet(TimePicker view, int hourOfDay,
                                                   int minute) {
 
-                                txtTime.setText(hourOfDay + ":" + minute);
                                 edtTime.setText(hourOfDay + ":" + minute);
                             }
                         }, mHour, mMinute, false);

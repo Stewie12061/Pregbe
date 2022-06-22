@@ -151,6 +151,9 @@ public class DangKy extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
                             ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(fullname, email, gender, phonenumber);
 
                             //extracting user reference from database for "registered users"

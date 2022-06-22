@@ -2,6 +2,8 @@ package com.example.pregbe.GioiThieu;
 
 public class ReadWriteUserDetails {
     public String fullName, email, gender, phoneNumber;
+    public String tenBe;
+    public int soTuan;
 
     //Constructor
     public ReadWriteUserDetails() {
@@ -12,6 +14,14 @@ public class ReadWriteUserDetails {
         this.email = email;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
+    }
+
+    public ReadWriteUserDetails(String tenBe) {
+        this.tenBe = tenBe;
+    }
+
+    public ReadWriteUserDetails(int soTuan) {
+        this.soTuan = soTuan;
     }
 
     public String getFullName() {

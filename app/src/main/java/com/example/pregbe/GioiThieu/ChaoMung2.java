@@ -20,7 +20,7 @@ Button DangNhap,batdau;
         DangNhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ChaoMung2.this, com.example.pregbe.GioiThieu.DangNhap.class);
+                Intent i = new Intent(ChaoMung2.this, DangNhap.class);
                 startActivity(i);
             }
         });

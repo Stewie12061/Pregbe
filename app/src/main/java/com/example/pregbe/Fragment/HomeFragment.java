@@ -38,30 +38,44 @@ public class HomeFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference referenceProfile, thongTinRef;
-    List<ReadWriteUserDetails> readWriteUserDetailsList;
-    List<com.example.pregbe.Model.TenBe> tenBeList;
-    TextView tenme, TenBe, SoKy, ChieuDai, MoTa;
+
+    TextView tenme, TenBe, SoKy, ChieuDai, MoTa, tuanThai;
     FirebaseRecyclerAdapter<Tuan, SoTuanViewHolder> adapter;
     String id2;
     ImageView HinhAnh;
 
     RecyclerView rvTuanThai;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                           Bundle savedInstanceState) {
-
-//
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        init(view);
 
-        referenceProfile.child(firebaseUser.getUid()).child("Parent").addValueEventListener(new ValueEventListener() {
+        firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app");
+        referenceProfile = firebaseDatabase.getReference("Users");
+        thongTinRef = firebaseDatabase.getReference("ThongTin");
+
+        tenme = view.findViewById(R.id.username);
+        TenBe = view.findViewById(R.id.TenBe);
+
+        rvTuanThai = view.findViewById(R.id.rvTuanThai);
+
+        HinhAnh = view.findViewById(R.id.hinhAnhBe);
+        ChieuDai = view.findViewById(R.id.chieuDaiBe);
+        SoKy = view.findViewById(R.id.soKyBe);
+        MoTa = view.findViewById(R.id.moTaBe);
+
+        tuanThai = view.findViewById(R.id.tuanThai);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUserId = user.getUid();
+
+        referenceProfile.child(currentUserId).child("Parent").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ReadWriteUserDetails bame = snapshot.getValue(ReadWriteUserDetails.class);
-                readWriteUserDetailsList.add(bame);
-//                tenme.setText(readWriteUserDetailsList.get(0).fullName);
-
+                ReadWriteUserDetails readWriteUserDetails =snapshot.getValue(ReadWriteUserDetails.class);
+                String tenMe =readWriteUserDetails.fullName;
+                tenme.setText(tenMe);
             }
 
             @Override
@@ -70,12 +84,15 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        referenceProfile.child(firebaseUser.getUid()).child("Baby").addValueEventListener(new ValueEventListener() {
+        referenceProfile.child(currentUserId).child("Baby").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                TenBe baby = snapshot.getValue(TenBe.class);
-                tenBeList.add(baby);
-//                TenBe.setText(tenBeList.get(0).tenBaby);
+                ReadWriteUserDetails readWriteUserDetails =snapshot.getValue(ReadWriteUserDetails.class);
+                String tenBe =readWriteUserDetails.tenBe;
+                int tuanthai = readWriteUserDetails.soTuan;
+                String tuanthaiString = Integer.toString(tuanthai);
+                tuanThai.setText(tuanthaiString);
+                TenBe.setText(tenBe);
             }
 
             @Override
@@ -83,6 +100,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
 
         rvTuanThai.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 
@@ -158,27 +176,5 @@ public class HomeFragment extends Fragment {
 
          rvTuanThai.setAdapter(adapter);
         adapter.startListening();
-    }
-
-    void init(View view){
-
-        mAuth = FirebaseAuth.getInstance();
-        firebaseUser = mAuth.getCurrentUser();
-        firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app/");
-        referenceProfile = firebaseDatabase.getReference(
-                "Users");
-        thongTinRef = firebaseDatabase.getReference("ThongTin");
-
-        tenme = view.findViewById(R.id.username);
-        TenBe = view.findViewById(R.id.TenBe);
-        readWriteUserDetailsList = new ArrayList<>();
-        tenBeList = new ArrayList<>();
-        rvTuanThai = view.findViewById(R.id.rvTuanThai);
-
-        HinhAnh = view.findViewById(R.id.hinhAnhBe);
-        ChieuDai = view.findViewById(R.id.chieuDaiBe);
-        SoKy = view.findViewById(R.id.soKyBe);
-        MoTa = view.findViewById(R.id.moTaBe);
-
     }
 }

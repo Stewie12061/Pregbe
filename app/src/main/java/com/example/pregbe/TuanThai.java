@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pregbe.Adapter.TuanThaiAdapter;
+import com.example.pregbe.GioiThieu.ReadWriteUserDetails;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +36,7 @@ public class TuanThai extends AppCompatActivity implements TuanThaiAdapter.Liste
     EditText tenThaiNhi;
     FirebaseUser firebaseUser;
     FirebaseAuth mAuth;
+    ReadWriteUserDetails readWriteUserDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,11 @@ public class TuanThai extends AppCompatActivity implements TuanThaiAdapter.Liste
         tieptheo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app/");
+                DatabaseReference referenceProfile = firebaseDatabase.getReference("Users");
+
+                readWriteUserDetails = new ReadWriteUserDetails(tenThaiNhi.getText().toString());
+                referenceProfile.child(firebaseUser.getUid()).child("Baby").setValue(readWriteUserDetails);
                 Intent intent = new Intent(TuanThai.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -71,13 +78,13 @@ public class TuanThai extends AppCompatActivity implements TuanThaiAdapter.Liste
 
     @Override
     public void OnClickListener(String sotuan) {
-        Toast.makeText(TuanThai.this, "click me", Toast.LENGTH_SHORT).show();
+        Toast.makeText(TuanThai.this, sotuan, Toast.LENGTH_SHORT).show();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app/");
-        DatabaseReference referenceProfile = firebaseDatabase.getReference(
-                "Users");
-        Map<String, Object> baby = new HashMap<>();
-        baby.put("tenBaby", tenThaiNhi.getText().toString());
-        baby.put("soTuan", sotuan);
-        referenceProfile.child(firebaseUser.getUid()).child("Baby").setValue(baby);
-  }
+        DatabaseReference referenceProfile = firebaseDatabase.getReference("Users");
+
+        int soTuan = Integer.parseInt(sotuan);
+        readWriteUserDetails = new ReadWriteUserDetails(soTuan);
+        referenceProfile.child(firebaseUser.getUid()).child("Baby").setValue(readWriteUserDetails);
+
+    }
 }

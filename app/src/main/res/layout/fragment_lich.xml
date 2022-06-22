@@ -18,8 +18,8 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="95dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="100dp"
             android:gravity="center"
             android:text="Ghi chú lịch khám"
@@ -30,14 +30,14 @@
         <CalendarView
             android:id="@+id/calendarView"
             style="@style/roundImageView"
-            android:layout_width="374dp"
-            android:layout_height="328dp"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
             android:layout_below="@+id/textView14"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="23dp"
-            android:layout_marginEnd="17dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
             android:background="@color/white"
 
             android:maxDate="07/01/2022" />
@@ -66,7 +66,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="108dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="108dp"
             android:gravity="center"
             android:text="Lịch khám trong tuần"
@@ -74,71 +74,13 @@
             android:textSize="@dimen/lable_4"
             android:textStyle="bold" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardview"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:layout_below="@+id/textView15"
-            android:layout_alignParentStart="true"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDatLich"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="17dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="20dp" >
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/txtTieuDe"
-                    android:layout_width="57dp"
-                    android:layout_height="17dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Thêm tiêu đề"
-                    app:layout_constraintStart_toEndOf="@+id/imageView5"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/txtDes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Thêm nội dung"
-                    app:layout_constraintStart_toStartOf="@+id/txtTieuDe"
-                    app:layout_constraintTop_toBottomOf="@+id/txtTieuDe" />
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/cuate"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/txtLich"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:text="Thêm ngày khám"
-                    app:layout_constraintStart_toStartOf="@+id/txtDes"
-                    app:layout_constraintTop_toBottomOf="@+id/txtDes" />
-
-                <TextView
-                    android:id="@+id/txtTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Thêm giờ khám"
-                    app:layout_constraintStart_toStartOf="@+id/txtLich"
-                    app:layout_constraintTop_toBottomOf="@+id/txtLich" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+            android:layout_marginEnd="0dp" />
 
     </RelativeLayout>
 </FrameLayout>
