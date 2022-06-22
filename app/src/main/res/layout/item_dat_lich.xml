@@ -20,6 +20,8 @@
             android:layout_marginTop="16dp"
             android:text="Thêm tiêu đề"
             android:textSize="18dp"
+            android:textColor="@color/orange_300"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imageView5"
             app:layout_constraintTop_toTopOf="@+id/imageView5" />
 

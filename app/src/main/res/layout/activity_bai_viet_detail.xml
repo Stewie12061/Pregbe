@@ -46,8 +46,8 @@
         android:layout_margin="16dp"
         android:text="List description"
         android:textSize="18dp"
-        android:textStyle="bold"
-        android:textColor="@color/orange_500"
+
+        android:textColor="@color/grey_400"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameListDetail" />
