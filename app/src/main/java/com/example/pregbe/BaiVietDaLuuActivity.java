@@ -42,8 +42,6 @@ public class BaiVietDaLuuActivity extends AppCompatActivity {
 
     FirebaseRecyclerAdapter<Favorite, FavoriteViewHolder> adapter;
 
-    TextView fav;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +53,8 @@ public class BaiVietDaLuuActivity extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         currentUserId = user.getUid();
-        fav = findViewById(R.id.favFav);
 
-        firebaseDatabase = FirebaseDatabase.getInstance("https://lovelybnb-b90d2-default-rtdb.asia-southeast1.firebasedatabase.app");
+        firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app");
         favoriteRef = firebaseDatabase.getReference("Favorite");
 
         getDataFavorite();
@@ -130,5 +127,5 @@ public class BaiVietDaLuuActivity extends AppCompatActivity {
         rvFavorite.setAdapter(adapter);
         adapter.startListening();
     }
-    
+
 }
