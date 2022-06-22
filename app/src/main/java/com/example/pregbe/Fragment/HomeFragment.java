@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pregbe.Adapter.DatLichHomeViewHolder;
 import com.example.pregbe.Adapter.DatLichViewHolder;
 import com.example.pregbe.Adapter.SoTuanViewHolder;
 import com.example.pregbe.GioiThieu.ReadWriteUserDetails;
@@ -129,9 +130,9 @@ public class HomeFragment extends Fragment {
 
         Query query = datLichRef.child(currentUserId);
         FirebaseRecyclerOptions<DatLich> options = new FirebaseRecyclerOptions.Builder<DatLich>().setQuery(query,DatLich.class).build();
-        FirebaseRecyclerAdapter<DatLich, DatLichViewHolder> adapter = new FirebaseRecyclerAdapter<DatLich, DatLichViewHolder>(options) {
+        FirebaseRecyclerAdapter<DatLich, DatLichHomeViewHolder> adapter = new FirebaseRecyclerAdapter<DatLich, DatLichHomeViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull DatLichViewHolder holder, int position, @NonNull DatLich model) {
+            protected void onBindViewHolder(@NonNull DatLichHomeViewHolder holder, int position, @NonNull DatLich model) {
                 String idDatLich = getRef(position).getKey();
 
                 datLichRef.child(currentUserId).child(idDatLich).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -157,9 +158,9 @@ public class HomeFragment extends Fragment {
 
             @NonNull
             @Override
-            public DatLichViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            public DatLichHomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dat_lich_home,parent,false);
-                DatLichViewHolder viewHolder = new DatLichViewHolder(v);
+                DatLichHomeViewHolder viewHolder = new DatLichHomeViewHolder(v);
                 return viewHolder;
             }
         };
