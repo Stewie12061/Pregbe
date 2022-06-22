@@ -12,7 +12,7 @@ import com.example.pregbe.R;
 
 public class DanhSachViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     public ImageView img;
-    public TextView tieude, chuthich, tgian;
+    public TextView tieude, chuthich;
     private ItemClickListener itemClickListener;
     public DanhSachViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -22,7 +22,6 @@ public class DanhSachViewHolder extends RecyclerView.ViewHolder implements View.
 
         chuthich = itemView.findViewById(R.id.chuthich);
 
-        tgian = itemView.findViewById(R.id.tgian);
         itemView.setOnClickListener(this);
 
     }

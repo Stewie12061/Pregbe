@@ -42,6 +42,13 @@ public class BaiViet2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bai_viet2);
+
+        id = getIntent().getStringExtra("idCate");
+
+        firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app");
+        baiVietDetailRef = firebaseDatabase.getReference("BaiVietDetail");
+        thongTinRef = firebaseDatabase.getReference("ThongTin");
+
         //nhan dlieu tu Fragment
         tuade = findViewById(R.id.tuade);
         Intent intent = getIntent();
@@ -52,9 +59,7 @@ public class BaiViet2 extends AppCompatActivity {
         RVtuan = findViewById(R.id.RVTuan);
         RVdanhsach = findViewById(R.id.rvDanhSach);
 
-        firebaseDatabase = FirebaseDatabase.getInstance("https://pregbe-default-rtdb.asia-southeast1.firebasedatabase.app");
-        baiVietDetailRef = firebaseDatabase.getReference("BaiVietDetail");
-        thongTinRef = firebaseDatabase.getReference("ThongTin");
+
 
         RVtuan.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.HORIZONTAL, false));
@@ -62,7 +67,7 @@ public class BaiViet2 extends AppCompatActivity {
         RVdanhsach.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false));
 
-        id = getIntent().getStringExtra("idCate");
+
 
         getTuan();
 
@@ -115,7 +120,9 @@ public class BaiViet2 extends AppCompatActivity {
                                                     @Override
                                                     public void onClick(View view, int position, boolean isLongClick) {
                                                         Intent intent = new Intent(BaiViet2.this,BaiVietDetailActivity.class);
-                                                        intent.putExtra("idDetail",idList);
+                                                        intent.putExtra("idDetail",adapterDanhSach.getRef(position).getKey());
+                                                        intent.putExtra("idTuan",idWeek);
+                                                        intent.putExtra("idCate",id);
                                                         startActivity(intent);
                                                     }
                                                 });

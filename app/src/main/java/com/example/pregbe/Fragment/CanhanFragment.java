@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.pregbe.BaiVietDaLuuActivity;
 import com.example.pregbe.GioiThieu.DangNhap;
 import com.example.pregbe.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class CanhanFragment extends Fragment {
     Button sighOut;
     FirebaseAuth firebaseAuth;
+    LinearLayout baiVietFav;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +43,15 @@ public class CanhanFragment extends Fragment {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getContext(), DangNhap.class);
+                startActivity(intent);
+            }
+        });
+
+        baiVietFav = view.findViewById(R.id.saveBaiViet);
+        baiVietFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), BaiVietDaLuuActivity.class);
                 startActivity(intent);
             }
         });
